@@ -100,7 +100,9 @@ SOONG_CONFIG_conquerGlobalVars_target_process_sdk_version_override := $(TARGET_P
 SOONG_CONFIG_conquerGlobalVars_target_surfaceflinger_fod_lib := $(TARGET_SURFACEFLINGER_FOD_LIB)
 SOONG_CONFIG_conquerGlobalVars_uses_camera_parameter_lib := $(TARGET_SPECIFIC_CAMERA_PARAMETER_LIBRARY)
 SOONG_CONFIG_conquerGlobalVars_target_inputdispatcher_skip_event_key := $(TARGET_INPUTDISPATCHER_SKIP_EVENT_KEY)
-ifneq ($(filter $(QSSI_SUPPORTED_PLATFORMS),$(TARGET_BOARD_PLATFORM)),)
+ifeq ($(TARGET_ENFORCES_QSSI),true)
+SOONG_CONFIG_conquerQcomVars_qcom_display_headers_namespace := vendor/qcom/opensource/commonsys-intf/display
+else ifneq ($(filter $(QSSI_SUPPORTED_PLATFORMS),$(TARGET_BOARD_PLATFORM)),)
 SOONG_CONFIG_conquerQcomVars_qcom_display_headers_namespace := vendor/qcom/opensource/commonsys-intf/display
 else
 SOONG_CONFIG_conquerQcomVars_qcom_display_headers_namespace := $(QCOM_SOONG_NAMESPACE)/display
